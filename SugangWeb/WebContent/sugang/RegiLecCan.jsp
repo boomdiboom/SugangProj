@@ -25,13 +25,14 @@
 			response.sendRedirect("ReadLecStu.jsp");
 		}else {
 			session.setAttribute("message", "등록하지 않은 강의입니다.");
-			response.sendRedirect("LectidFail.jsp");
+			response.sendRedirect("LectidFail2.jsp");
 		}
 	}else {
 		session.setAttribute("message", "존재하지 않는 강의입니다.");
-		response.sendRedirect("LectidFail.jsp");
+		response.sendRedirect("LectidFail2.jsp");
 	}
 	
 	
-	
 %>
+</body>
+</html>

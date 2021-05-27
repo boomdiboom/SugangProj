@@ -77,6 +77,8 @@ public class SuGangDAO {
 		return pw;
 	}
 	
+	
+	
 	public String stuidCheck(String id) {
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -537,6 +539,49 @@ public class SuGangDAO {
 		return boo;
 	}
 	
+	public String readSche(String lectid) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String sche = "";
+		String sql = "select schedule from lecture where lectid = '" +lectid+"'";
+		try {
+			con = DBCon.getCon();
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				sche = rs.getString(1);
+			}
+		}catch(Exception e) {
+			System.out.println("스케쥴 read 오류");
+		}finally {
+			DBCon.close(con, ps, rs);
+		}
+		return sche;
+	}
+	
+	public String regiScheCheck(String stuid,String Sche) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String boo = "false";
+		String sql = "select * from stuincla natural join lecture where Schedule = '" + Sche + "' and stuid = '" +stuid+"'";
+		try {
+			con = DBCon.getCon();
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				boo = "true";
+			}else
+				boo = "false";
+		}catch(Exception e) {
+			System.out.println("e");
+		}finally {
+			DBCon.close(con, ps, rs);
+		}
+		return boo;
+	}
+	
 	public void regiLect(String stuid,String lectid) {
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -546,7 +591,7 @@ public class SuGangDAO {
 			ps = con.prepareStatement(sql);
 			ps.execute();
 		}catch(Exception e) {
-			System.out.println("수강신청 오류");
+			System.out.println(e);
 		}finally {
 			DBCon.close(con, ps, null);
 		}
@@ -612,7 +657,7 @@ public class SuGangDAO {
 				lname = rs.getString(1);
 			}
 		}catch(Exception e) {
-			System.out.println("schedule 읽기 오류");
+			System.out.println(e);
 		}finally {
 			DBCon.close(con, ps, rs);
 		}
@@ -649,4 +694,6 @@ public class SuGangDAO {
 		}
 		return list;
 	}
+	
+	
 }

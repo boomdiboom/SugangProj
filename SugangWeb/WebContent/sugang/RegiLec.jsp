@@ -15,14 +15,20 @@
 	String stuid = (String)session.getAttribute("user_id");
 	String lectid = request.getParameter("lectid");
 	SuGangDAO dao = new SuGangDAO();
-	String check = dao.regiCheck(stuid, lectid);
+	String regicheck = dao.regiCheck(stuid, lectid);
+	String sche = dao.readSche(lectid);
+	String schecheck = dao.regiScheCheck(stuid, sche);
 	Lecture lec = dao.readLec(lectid);
 	if(lec!=null) {
-		if(check.equals("false")) {
-			dao.regiLect(stuid, lectid);
-			dao.regiNumPlus(lectid);
-			
-			response.sendRedirect("ReadLecStu.jsp");
+		if(regicheck.equals("false")) {
+			if(schecheck.equals("false")) {
+				dao.regiLect(stuid, lectid);
+				dao.regiNumPlus(lectid);
+				response.sendRedirect("ReadLecStu.jsp");
+			}else {
+				session.setAttribute("message", "등록된 강의와 시간표가 겹칩니다.");
+				response.sendRedirect("LectidFail.jsp");
+			}
 		}else {
 			session.setAttribute("message", "이미 등록한 강의입니다.");
 			response.sendRedirect("LectidFail.jsp");
