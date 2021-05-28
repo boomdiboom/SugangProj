@@ -21,11 +21,17 @@
 	lect.setProfid(profid);
 	lect.setStunum(0);
 	SuGangDAO dao = new SuGangDAO();
-	String fienum=dao.fienumCheck(lect.getFieid());
-	String lectid = lect.getFieid() + fienum;
-	lect.setLectid(lectid);
-	dao.insertLect(lect);
-	request.setAttribute("target","ReadLecProf");
+	String check = dao.profScheCheck(profid, lect.getSchedule());
+	if(check.equals("false")) {
+		String fienum=dao.fienumCheck(lect.getFieid());
+		String lectid = lect.getFieid() + fienum;
+		lect.setLectid(lectid);
+		dao.insertLect(lect);
+		response.sendRedirect("ReadLecProf.jsp");
+	}else {
+		response.sendRedirect("ProfScheError.jsp");
+	}
+	
 %>
 </body>
 </html>

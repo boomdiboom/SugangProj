@@ -582,6 +582,28 @@ public class SuGangDAO {
 		return boo;
 	}
 	
+	public String profScheCheck(String profid,String Sche) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String boo = "false";
+		String sql = "select * from lecture where Schedule = '" + Sche + "' and profid = '" +profid+"'";
+		try {
+			con = DBCon.getCon();
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				boo = "true";
+			}else
+				boo = "false";
+		}catch(Exception e) {
+			System.out.println("e");
+		}finally {
+			DBCon.close(con, ps, rs);
+		}
+		return boo;
+	}
+	
 	public void regiLect(String stuid,String lectid) {
 		Connection con = null;
 		PreparedStatement ps = null;

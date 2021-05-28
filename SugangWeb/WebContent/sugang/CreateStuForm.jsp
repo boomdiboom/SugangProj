@@ -87,8 +87,8 @@ function id_search(){
 			   <OPTION> 053</OPTION>     
 			   <OPTION> 011</OPTION>     
 		    </SELECT>
-		   - <INPUT NAME="tel2" SIZE="4" maxlength=4>
-		   - <INPUT NAME="tel3" SIZE="4" maxlength=4> </TD> 
+		   - <INPUT type = "number" NAME="tel2" SIZE="4" maxlength=4>
+		   - <INPUT type = "number" NAME="tel3" SIZE="4" maxlength=4> </TD> 
 	  </TR>
 	  <TR>   
 	   <TD COLSPAN="2" ALIGN="center"> <INPUT TYPE="submit" VALUE="등록하기">
