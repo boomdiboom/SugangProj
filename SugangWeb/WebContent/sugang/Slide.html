@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+img{width: "700px"; height: "1000px";}
+</style>
+<script type="text/javascript"> 
+var imgArray=new Array(); 
+imgArray[0]="./image/경영학.jpg"; 
+imgArray[1]="./image/경제학.jpg"; 
+imgArray[2]="./image/국어국문학.png"; 
+imgArray[3]="./image/물리학.jpg"; 
+function showImage(){ var imgNum=Math.round(Math.random()*3); 
+var objImg=document.getElementById("introimg"); 
+objImg.src=imgArray[imgNum];
+setTimeout(showImage,3000); 
+} 
+</script>
+
+</head>
+<body onload="showImage()"> <img id="introimg" border="0">
+</body>
+</html>
